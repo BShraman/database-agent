@@ -1,0 +1,45 @@
+version: "3.8"
+
+x-shared-settings: &shared-settings
+  environment:
+    - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+  volumes:
+    - ./include/data:${INLINE_DATA_VOLUME}
+  networks:
+    - database-agent
+
+services:
+  postgres:
+    image: ${PG_BASE_IMAGE}
+    container_name: postgresql
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DB}
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - database-agent
+    ports:
+      - ${PG_PORT}:${PG_PORT}
+
+  # gradio:
+  #   image: ${AIRFLOW_IMAGE}
+  #   container_name: gradio-chatbot
+  #   environment:
+  #     - KEY=VALUE
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "${GRADIO_WEB_PORT}:${GRADIO_WEB_PORT}"
+  #   volumes:
+  #     - ./chromadb:${PERSIST_DIRECTORY}
+  #     - ./include/gradio:${GRADIO_HOME}
+  #     - ./include/data:${INLINE_DATA_VOLUME}
+  #   entrypoint: ["python3", "${GRADIO_HOME}/app.py"]
+  #   networks:
+  #     - database-agent
+
+networks:
+  database-agent:
+    driver: bridge
