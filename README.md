@@ -1,11 +1,6 @@
 # PostgreSQL Database Agent
 
-## Application Running  
-```
-python3 main.py 
-```
-
-## Application Response
+## Application  
 ```
 (venv) shraman@shramans-mbp database-agent % python3 main.py
 /Users/shraman/Projects/GIT/database-agent/venv/lib/python3.13/site-packages/langsmith/client.py:277: LangSmithMissingAPIKeyWarning: API key must be provided when using hosted LangSmith API
