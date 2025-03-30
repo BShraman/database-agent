@@ -1,4 +1,9 @@
-# PostgreSQL Database Agent
+
+## Overview
+
+The PostgreSQL Database Agent is a Python-based application designed to interact with PostgreSQL databases. It leverages natural language processing to interpret user queries and translates them into SQL commands. The agent can connect to a PostgreSQL database, retrieve schema information, execute queries, and provide results in a user-friendly format. This tool is particularly useful for users who want to interact with databases without writing SQL manually.
+
+The application is built using the LangChain `SQLDatabaseToolkit` framework, which simplifies the integration of natural language interfaces with SQL databases. The system prompt is designed to guide the agent in understanding user queries, ensuring accurate SQL generation and execution. 
 
 ## Application  
 ```
