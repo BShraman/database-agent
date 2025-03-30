@@ -22,6 +22,8 @@ services:
       - database-agent
     ports:
       - ${PG_PORT}:${PG_PORT}
+    env_file:
+      - .env
 
   # gradio:
   #   image: ${AIRFLOW_IMAGE}

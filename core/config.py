@@ -1,5 +1,5 @@
 
-from langchain_community.chat_models import ChatOpenAI
+from langchain.chat_models import init_chat_model
 from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
 from dotenv import load_dotenv
 import logging
@@ -21,9 +21,10 @@ class Config:
     PG_DB:str = os.getenv('PG_DB', 'postgres')
 
     #LLM
-    # LLM_MODEL = os.getenv('LLM_MODEL', 'gpt-3.5-turbo')
-    # LLM = ChatOpenAI(LLM_MODEL)
-    # OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
-    LLM:str = HuggingFaceInferenceAPI(model_name="Qwen/Qwen2.5-Coder-32B-Instruct")
+    LLM_MODEL = os.getenv('LLM_MODEL', 'gpt-4o-mini')
+    LLM = init_chat_model(LLM_MODEL, model_provider="openai")
+    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
+    # HUGGING_FACE_HUB_TOKEN = os.getenv('HUGGING_FACE_HUB_TOKEN', '')
+    # LLM:str = HuggingFaceInferenceAPI(model_name="Qwen/Qwen2.5-Coder-32B-Instruct")
 
 config = Config()

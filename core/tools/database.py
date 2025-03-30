@@ -10,14 +10,17 @@ class Database:
         self.port = config.PG_PORT
         self.llm = config.LLM
 
-    def connect(self):
+    def toolkit(self):
         from langchain_community.utilities.sql_database import SQLDatabase
         from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 
-        self.logger.info(f"postgresql+psycopg2://{self.user}:{self.password}@{self.host}/{self.db_name}")
-        db = SQLDatabase.from_uri(f'postgresql+psycopg2://{self.user}:{self.password}@{self.host}/{self.db_name}')
+        try:
+            db = SQLDatabase.from_uri(f'postgresql+psycopg2://{self.user}:{self.password}@{self.host}/{self.db_name}')
+            toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+            self.logger.info("Database connection established successfully.")
+        except Exception as e:
+            self.logger.error(f"Failed to connect to the database: {e}")
+            raise
         
-        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
-
-        return toolkit
+        return toolkit.get_tools()
 
