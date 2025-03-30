@@ -1,4 +1,4 @@
-# POSTGRESQL Database Agent
+# PostgreSQL Database Agent
 
 ## Application Running  
 ```
